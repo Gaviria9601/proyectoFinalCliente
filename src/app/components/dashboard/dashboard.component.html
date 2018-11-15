@@ -1,0 +1,106 @@
+<p-toast [style]="{marginTop: '80px'}"></p-toast>
+
+<form [formGroup]="lugform" (ngSubmit)="crearLugar(lugform.value)">
+  <p-panel header="Registro Lugares">
+    <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-2">
+          Lugar *:
+        </div>
+        <div class="ui-grid-col-6">
+          <input pInputText type="text" formControlName="name" placeholder="Requerido" />
+        </div>
+        <div class="ui-grid-col-4">
+          <p-message severity="error" text="Lugar es requerido" *ngIf="!lugform.controls['name'].valid&&lugform.controls['name'].dirty"></p-message>
+        </div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-2">
+          Dirección *:
+        </div>
+        <div class="ui-grid-col-6">
+          <input pInputText type="text" formControlName="location" placeholder="Requerido" />
+        </div>
+        <div class="ui-grid-col-4">
+          <p-message severity="error" text="Dirección es requerido" *ngIf="!lugform.controls['location'].valid&&lugform.controls['location'].dirty"></p-message>
+        </div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-2">
+          Descripción :
+        </div>
+        <div class="ui-grid-col-6">
+          <textarea pInputTextarea type="text" cols="89" rows="5" formControlName="description"></textarea>
+        </div>
+        <div class="ui-grid-col-4"></div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-2"></div>
+        <div class="ui-grid-col-6">
+          <button pButton type="submit" label="Registrar" [disabled]="!lugform.valid"></button>
+        </div>
+        <div class="ui-grid-col-4"></div>
+      </div>
+      <div style="text-align:center;margin-top:20px" *ngIf="submitted">
+      </div>
+    </div>
+  </p-panel>
+</form>
+
+<p-table [columns]="cols" [value]="places" selectionMode="single" [(selection)]="selectedPlace" (onRowSelect)="onRowSelect($event)"
+  [paginator]="true" [rows]="10">
+  <ng-template pTemplate="caption">
+    Lista de Lugares
+  </ng-template>
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+        {{col.header}}
+        <p-sortIcon [field]="col.field"></p-sortIcon>
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-rowData let-columns="columns">
+    <tr [pSelectableRow]="rowData">
+      <td *ngFor="let col of columns">
+        {{rowData[col.field]}}
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<p-dialog header="Detalles Lugar" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true"
+  [width]="750">
+  <div class="ui-g ui-fluid" *ngIf="lugares">
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="Lugar">Lugar</label>
+      </div>
+      <div class="ui-g-8">
+        <input pInputText id="Lugar" [(ngModel)]="lugares.name" />
+      </div>
+    </div>
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="Dirección">Dirección</label>
+      </div>
+      <div class="ui-g-8">
+        <input pInputText id="Dirección" [(ngModel)]="lugares.location" />
+      </div>
+    </div>
+    <div class="ui-g-12">
+      <div class="ui-g-4">
+        <label for="Descripción">Descripción</label>
+      </div>
+      <div class="ui-g-8">
+        <textarea pInputTextarea id="Descripción" type="text" cols="63" rows="10" [(ngModel)]="lugares.description" ></textarea>
+      </div>
+    </div>
+  </div>
+  <p-footer>
+    <div class="ui-dialog-buttonpane ui-helper-clearfix">
+      <button type="button" pButton icon="fa fa-check" (click)="actualizarLugar()" label="Actualizar"></button>
+      <button type="button" pButton icon="fa fa-close" (click)="eliminarLugar()" label="Eliminar"></button>
+    </div>
+  </p-footer>
+</p-dialog>

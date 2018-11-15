@@ -1,0 +1,12 @@
+<div align="center">
+  <h1>Lugares</h1>
+</div>
+<section>
+  <article *ngFor="let place of places">
+    <img src="../../../assets/img.png" alt="">
+    <h2>Lugar: {{place.name | titlecase}}</h2>
+    <p>Descripción: {{place.description | titlecase}}</p>
+    <hr>
+    <address>Dirección: {{place.location | titlecase}}</address>
+  </article>
+</section>

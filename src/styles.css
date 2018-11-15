@@ -1,1 +1,49 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+
+
+.header {
+    min-height: 64px;
+    padding: 2px 20px;
+    background-color: #1976d2;
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.header .logo {
+    color: rgb(255, 244, 244);
+    margin-bottom: 0;
+    font-size: 1.375rem;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.header-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.header-list li {
+    width: 21px;
+    height: 21px;
+    margin-left: 16px;
+    
+}
+
+.header-list li:hover {
+    opacity: 0.3;
+    transition-duration: 0.5s;
+}
+
+.header-info {
+    margin-left: auto;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+}
