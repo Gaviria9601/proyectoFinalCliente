@@ -47,10 +47,15 @@
   </p-panel>
 </form>
 
-<p-table [columns]="cols" [value]="places" selectionMode="single" [(selection)]="selectedPlace" (onRowSelect)="onRowSelect($event)"
+<p-table #dt [columns]="cols" [value]="places" selectionMode="single" [(selection)]="selectedPlace" (onRowSelect)="onRowSelect($event)"
   [paginator]="true" [rows]="10">
   <ng-template pTemplate="caption">
     Lista de Lugares
+    <div style="text-align: right">
+      <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+      <input type="text" pInputText size="50" placeholder="Buscador filterGlobal" (input)="dt.filterGlobal($event.target.value, 'contains')"
+        style="width:auto">
+    </div>
   </ng-template>
   <ng-template pTemplate="header" let-columns>
     <tr>
@@ -93,7 +98,7 @@
         <label for="Descripción">Descripción</label>
       </div>
       <div class="ui-g-8">
-        <textarea pInputTextarea id="Descripción" type="text" cols="63" rows="10" [(ngModel)]="lugares.description" ></textarea>
+        <textarea pInputTextarea id="Descripción" type="text" cols="63" rows="10" [(ngModel)]="lugares.description"></textarea>
       </div>
     </div>
   </div>
